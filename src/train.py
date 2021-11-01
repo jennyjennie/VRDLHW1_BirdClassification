@@ -229,7 +229,8 @@ def train_model(model, criterion, optimizer, scheduler,
                             'epoch_acc_history': epoch_acc_history
                            }, model_save_path + MODEL_SAVE_NAME + ".pth") # save on GPU mode
                 print("Save model info based on val acc.")
-                write_training_info_txtfile(phase, epoch, trained_epochs, num_epochs, epoch_loss, running_corrects, best_acc, tag)
+                write_training_info_txtfile(phase, epoch, trained_epochs, num_epochs, 
+                                            epoch_loss, running_corrects, best_acc, tag)
             # Save the model every five epochs.
             elif (epoch+1)%5 == 0:
                 # save model when final epoch and not accroding validation accuracy
@@ -241,7 +242,8 @@ def train_model(model, criterion, optimizer, scheduler,
                             'epoch_acc_history': epoch_acc_history
                            }, model_save_path + MODEL_SAVE_NAME + '_e' + str(int(epoch+1)) + ".pth")
                 print("End final epoch - Save model info.")
-                write_training_info_txtfile(phase, epoch, trained_epochs, num_epochs, epoch_loss, running_corrects, epoch_acc, tag)
+                write_training_info_txtfile(phase, epoch, trained_epochs, num_epochs, 
+                                            epoch_loss, running_corrects, epoch_acc, tag)
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(
