@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+python3 inference.py -m resnet101 -mp model/resnet101_handin1.pth -ftag _1 && python3 inference.py -m resnext50_32x4d -mp model/resnext50_32x4d_handin2.pth -ftag _2 && python3 inference.py -m resnext101_32x8d -mp model/resnext101_32x8d_1_handin3.pth -ftag _3 && python3 inference.py -m resnext101_32x8d -mp model/resnext101_32x8d_2_handin4.pth -ftag _4 && python3 inference.py -m resnext101_32x8d -mp model/resnext101_32x8d_3_handin5.pth -ftag _5 && python3 ensemble.py
