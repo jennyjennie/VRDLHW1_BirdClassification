@@ -81,7 +81,8 @@ def load_model(model, model_path=None, IS_TRAINING=False, IS_RESUME_TRAINIG=Fals
         checkPointStore.epoch_loss_history = checkpoint['epoch_loss_history']
         checkPointStore.epoch_acc_history = checkpoint['epoch_acc_history']
         checkPointStore.model_state_dict = checkpoint['model_state_dict']
-        print(f'Trained epochs previously : {checkPointStore.total_epoch}\nBest val Acc : {checkPointStore.Best_val_Acc}')
+        print(f'Trained epochs previously : {checkPointStore.total_epoch}\n\
+                Best val Acc : {checkPointStore.Best_val_Acc}')
         print("Successfully loaded trained model.")
     else:
         print("No trained model found, using built-in pretrained model.")
