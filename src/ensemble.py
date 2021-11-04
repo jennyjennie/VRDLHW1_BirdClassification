@@ -1,9 +1,9 @@
-""" 
-Ensemble - Bagging (Majority Voting) 
-""" 
+"""
+Ensemble - Bagging (Majority Voting)
+"""
 
 # Imports
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import os
 import zipfile
@@ -17,29 +17,29 @@ def MajorityVoting(file_dir, fileNames):
     for i, fn in enumerate(fileNames):
         filepath = file_dir + '/' + fn
         zip_file = zipfile.ZipFile(filepath)
-        df = pd.read_csv(zip_file.open('answer.txt'), 
-                         sep = ' ', names = ['id', 'labels'])
+        df = pd.read_csv(zip_file.open('answer.txt'),
+                         sep=' ', names=['id', 'labels'])
         labels_int = [int(label[0:3])-1 for label in df['labels']]
         numOflabels = len(labels_int)
         # Apply one hot encoding to deal with majority voting
         # Convert array of indices to 1-hot encoded numpy array
         # initalize np 2D-array with all zeros
         if i == 0:
-            one_hot_Mat = np.zeros((numOflabels, NUM_CLASSES)) # 2D array -> (# of data in testing set, # of classes)
+            one_hot_Mat = np.zeros((numOflabels, NUM_CLASSES))  # 2D array -> (# of data in testing set, # of classes)
             img_id = df["id"]
-        one_hot_Mat[np.arange(numOflabels), labels_int] += 1 # Accumulate voting from each model to corresponding label in 1-hot encoding 
+        one_hot_Mat[np.arange(numOflabels), labels_int] += 1  # Accumulate voting from each model to corresponding label in 1-hot encoding
 
     # pick up the majority label in 1-hot encoding
-    ensemble_result = np.argmax(one_hot_Mat, axis=1)    
+    ensemble_result = np.argmax(one_hot_Mat, axis=1)
     # tranlate label(int) to label(str)
-    label_result = [str(label_int + 1).zfill(3) + '.' + LABELS[label_int] 
+    label_result = [str(label_int + 1).zfill(3) + '.' + LABELS[label_int]
                     for label_int in ensemble_result]
 
     # write final result to text file
     d = {'id': img_id, 'label': label_result}
     df = pd.DataFrame(data=d)
-    df.to_csv(file_dir + '/' + "ensemble.txt", 
-              index=False, header = None, sep = ' ')
+    df.to_csv(file_dir+'/'+"ensemble.txt",
+              index=False, header=None, sep=' ')
     print("Successfully complete ensemble prediction.")
 
 

@@ -1,6 +1,6 @@
-""" 
-Inference Model 
-""" 
+"""
+Inference Model
+"""
 
 # Imports
 import torch
@@ -10,7 +10,7 @@ import torchvision.transforms as transforms
 import torchvision.models as models
 from torch.utils.data import DataLoader
 
-import argparse 
+import argparse
 import numpy as np
 
 from load_dataset import TestDataset
@@ -39,9 +39,9 @@ image_datasets = {x: TestDataset(DATASET_PATH + 'testing_img_order.txt',
                   data_dir[x], data_transforms[x]) for x in ["test"]}
 dataset_sizes = {x: len(image_datasets[x]) for x in ['test']}
 print(f'(Data Size) testing data: {dataset_sizes["test"]}')
-testloaders = {x: DataLoader(dataset=image_datasets[x], batch_size=BATCHSIZE, 
+testloaders = {x: DataLoader(dataset=image_datasets[x], batch_size=BATCHSIZE,
                              pin_memory=True, num_workers=0)
-              for x in ['test']}
+               for x in ['test']}
 
 
 # Test Model
@@ -66,7 +66,7 @@ def parse_args():
     parser.add_argument("-m", dest="model_name", default="resnet50", type=str)
     parser.add_argument("-mp", dest="model_path", type=str)
     parser.add_argument("-ftag", dest="filetag", default="", type=str)
-    
+
     return parser.parse_args()
 
 
